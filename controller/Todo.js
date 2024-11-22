@@ -10,7 +10,7 @@ exports.createTodo = asyncHandler(async (req, res, next) => {
   let result;
   result = await Category.findById(req.params.categoryId);
   if (!result) {
-    return next(new AppError(400, "category id not found"));
+    return next(new AppError(400, "category id not found post todo req "));
   }
   req.body.categoryId = req.params.categoryId;
   result = await Todo.create(req.body);
@@ -56,7 +56,9 @@ exports.updateTodo = asyncHandler(async (req, res, next) => {
     if (!result) {
       next(new AppError(400, "todo not found from update cat"));
     }
+    console.log(req.body);
     req.body.categoryId = req.params.categoryId;
+    console.log(req.body);
     result = await Todo.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -71,7 +73,7 @@ exports.updateTodo = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.deleteTodo=asyncHandler(async(req,res)=>{
+exports.deleteTodo=asyncHandler(async(req,res,next)=>{
     let result
     result=await Todo.findById(req.params.id)
     if(!result){
