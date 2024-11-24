@@ -23,12 +23,7 @@ app.all('*',(req,res)=>{
          })
 })
 
-app.get('/blog',(req,res)=>{
-    res.status(200).json({
-        success:true,
-        message:"home page"
-    })
-})
+
 app.use(ErrorHandler)
 app.listen(process.env.PORT,()=>{
     console.log(`listening on port ${process.env.PORT}`)
